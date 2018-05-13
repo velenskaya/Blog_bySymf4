@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class MainController extends Controller
 {
     /**
-     * @Route("/main", name="main")
+     * @Route("/", name="main")
      */
     public function index()
     {
