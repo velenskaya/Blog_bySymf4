@@ -16,4 +16,15 @@ class BlogController extends Controller
             'controller_name' => 'BlogController',
         ]);
     }
+
+    /**
+     * @Route("/article/{id}", name="article")
+     */
+    public function article($id)
+    {
+        return $this->render('news/article.html.twig', [
+            'controller_name' => 'NewsController',
+            'id' => $id,
+        ]);
+    }
 }
