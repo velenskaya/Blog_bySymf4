@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactRequestRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class ContactRequest
 {
@@ -22,12 +23,12 @@ class ContactRequest
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $phone_number;
 
@@ -35,6 +36,12 @@ class ContactRequest
      * @ORM\Column(type="text")
      */
     private $message;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
 
     public function getId()
     {
@@ -87,5 +94,29 @@ class ContactRequest
         $this->message = $message;
 
         return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @param \DateTime $created_at
+     */
+    public function setCreatedAt(\DateTime $created_at): void
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function initSaveCreatedAt()
+    {
+        $this->created_at = new \DateTime();
     }
 }

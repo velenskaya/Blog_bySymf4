@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
@@ -37,7 +38,7 @@ class Article
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
      */
     private $post_image;
 
@@ -104,5 +105,13 @@ class Article
         $this->post_image = $post_image;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function initSaveCreatedAt()
+    {
+        $this->created_at = new \DateTime();
     }
 }

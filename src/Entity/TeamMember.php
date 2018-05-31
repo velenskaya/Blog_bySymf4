@@ -31,6 +31,12 @@ class TeamMember
      */
     private $job_title;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     */
+    private $photo;
+
     public function getId()
     {
         return $this->id;
@@ -70,5 +76,21 @@ class TeamMember
         $this->job_title = $job_title;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoto(): string
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param string $photo
+     */
+    public function setPhoto(string $photo): void
+    {
+        $this->photo = $photo;
     }
 }
