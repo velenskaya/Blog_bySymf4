@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactRequestRepository")
@@ -19,21 +20,25 @@ class ContactRequest
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
+     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=12, nullable=true)
+     * @Assert\Length(min="10", max="12")
      */
     private $phone_number;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $message;
 
@@ -72,12 +77,12 @@ class ContactRequest
         return $this;
     }
 
-    public function getPhoneNumber(): ?int
+    public function getPhoneNumber(): ?string
     {
         return $this->phone_number;
     }
 
-    public function setPhoneNumber(int $phone_number): self
+    public function setPhoneNumber(string $phone_number): self
     {
         $this->phone_number = $phone_number;
 
@@ -118,5 +123,14 @@ class ContactRequest
     public function initSaveCreatedAt()
     {
         $this->created_at = new \DateTime();
+    }
+
+    /**
+     * @Assert\IsTrue(payload="email")
+     * @return bool
+     */
+    public function isRequiredFieldNotEmpty()
+    {
+        return $this->getEmail() || $this->getPhoneNumber();
     }
 }
