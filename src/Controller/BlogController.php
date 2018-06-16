@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -18,13 +20,18 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/article/{id}", name="article")
+     * @Route("/article/{slug}", name="article")
+     * @ParamConverter("article")
      */
-    public function article($id)
+    public function article(Article $article)
     {
-        return $this->render('news/article.html.twig', [
-            'controller_name' => 'NewsController',
-            'id' => $id,
+        return $this->render('blog/article.html.twig', [
+            'article' => $article,
         ]);
+
+        //$repository = $this->getDoctrine()->getRepository(Article::class);
+        //$article = $repository->findOneBy(['slug' => $slug]);
+        //var_dump($article);
+        //exit;
     }
 }

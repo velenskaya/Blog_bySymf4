@@ -42,6 +42,11 @@ class Article
      */
     private $post_image;
 
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $slug;
+
     public function getId()
     {
         return $this->id;
@@ -113,5 +118,17 @@ class Article
     public function initSaveCreatedAt()
     {
         $this->created_at = new \DateTime();
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
