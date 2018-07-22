@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Blog;
 
 use App\Form\ContactRequestType;
 use Symfony\Component\HttpFoundation\Request;
