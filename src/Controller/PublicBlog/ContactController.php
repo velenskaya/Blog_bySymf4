@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Blog;
+namespace App\Controller\PublicBlog;
 
 use App\Form\ContactRequestType;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +27,7 @@ class ContactController extends Controller
             return $this->redirectToRoute('contact');
         }
 
-        return $this->render('contact/index.html.twig', [
+        return $this->render('PublicBlog/contact/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }

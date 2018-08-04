@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Controller\Blog;
+namespace App\Controller\PublicBlog;
 
+use App\Controller\CoreBlog\BaseController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class AboutController extends Controller
+class AboutController extends BaseController
 {
+    const RENDER_PREFIX = 'PublicBlog/';
+
     /**
      * @Route("/about", name="about")
      */

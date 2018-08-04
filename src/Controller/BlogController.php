@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\PublicBlog;
+namespace App\Controller;
 
 use App\Entity\Article;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -14,7 +14,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return $this->render('PublicBlog/blog/index.html.twig', [
+        return $this->render('blog/index.html.twig', [    
             'controller_name' => 'BlogController',
         ]);
     }
@@ -25,7 +25,7 @@ class BlogController extends Controller
      */
     public function article(Article $article)
     {
-        return $this->render('PublicBlog/blog/article.html.twig', [
+        return $this->render('blog/article.html.twig', [
             'article' => $article,
         ]);
 
