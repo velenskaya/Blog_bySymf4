@@ -108,6 +108,9 @@ class ArticleController extends BaseController
         return $this->redirectToRoute('article_index');
     }
 
+    /**
+     * @return string
+     */
     protected function getPostImagePath()
     {
         return $this->container->getParameter('kernel.project_dir') . '/public/upload_files/articles';

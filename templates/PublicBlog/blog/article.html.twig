@@ -15,13 +15,12 @@
                     <hr>
                 </div>
                 <div class="col-lg-12 text-center">
-                    <img class="img-responsive img-border img-full" src="img/slide-1.jpg" alt="">
+                    <img class="img-responsive img-border img-full" src="{{ articleImgPath ~ article.postImage }}" alt="">
                     <h2>{{ article.title }}
                         <br>
-                        <small>{{ article.createdAt|date('d/m/Y')}}</small>
+                        <small>{{ article.createdAt|localizeddate('full', 'none', 'ru_RU')}}</small>
                     </h2>
                     <p>{{ article.content }}</p>
-                    <a href="#" class="btn btn-default btn-lg">Read More</a>
                     <hr>
                 </div>
 

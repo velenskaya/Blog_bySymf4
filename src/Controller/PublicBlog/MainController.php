@@ -2,17 +2,18 @@
 
 namespace App\Controller\PublicBlog;
 
+use App\Controller\CoreBlog\BaseController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class MainController extends Controller
+class MainController extends BaseController
 {
+    const RENDER_PREFIX = 'PublicBlog/';
     /**
      * @Route("/", name="homepage")
      */
     public function index()
     {
-        return $this->render('PublicBlog/main/index.html.twig', [
+        return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }

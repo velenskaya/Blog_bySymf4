@@ -2,13 +2,15 @@
 
 namespace App\Controller\PublicBlog;
 
+use App\Controller\CoreBlog\BaseController;
 use App\Form\ContactRequestType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ContactController extends Controller
+class ContactController extends BaseController
 {
+    const RENDER_PREFIX = 'PublicBlog/';
+
     /**
      * @Route("/contact", name="contact")
      */
@@ -27,7 +29,7 @@ class ContactController extends Controller
             return $this->redirectToRoute('contact');
         }
 
-        return $this->render('PublicBlog/contact/index.html.twig', [
+        return $this->render('contact/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }

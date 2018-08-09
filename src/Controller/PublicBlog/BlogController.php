@@ -4,18 +4,29 @@ namespace App\Controller\PublicBlog;
 
 use App\Entity\Article;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use App\Controller\CoreBlog\BaseController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class BlogController extends Controller
+class BlogController extends BaseController
 {
+    const RENDER_PREFIX = 'PublicBlog/';
+
     /**
      * @Route("/blog", name="blog")
      */
     public function index()
     {
-        return $this->render('PublicBlog/blog/index.html.twig', [
-            'controller_name' => 'BlogController',
+        $articles = $this
+            ->getDoctrine()
+            ->getRepository(Article::class)
+            ->findAll();
+
+        return $this->render('blog/index.html.twig', [
+            'articleImgPath' => '\upload_files\articles\\',
+            'articles' => $articles,
+//            'title' => $articles[0]->getTitle(),
+//            'shortContent' => $shortContent,
+
         ]);
     }
 
@@ -25,8 +36,9 @@ class BlogController extends Controller
      */
     public function article(Article $article)
     {
-        return $this->render('PublicBlog/blog/article.html.twig', [
+        return $this->render('blog/article.html.twig', [
             'article' => $article,
+            'articleImgPath' => '\upload_files\articles\\',
         ]);
 
         //$repository = $this->getDoctrine()->getRepository(Article::class);
