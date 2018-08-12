@@ -15,7 +15,7 @@
                     <hr>
                 </div>
                 <div class="col-lg-12 text-center">
-                    {% for article in articles %}
+                    {% for article in pagination %}
                         <img class="img-responsive img-border img-full" src="{{ articleImgPath ~ article.postImage }}" alt="">
                         <h2>{{ article.title }}
                             <br>
@@ -47,12 +47,9 @@
                     {#<hr>#}
                 {#</div>#}
                 <div class="col-lg-12 text-center">
-                    <ul class="pager">
-                        <li class="previous"><a href="#">&larr; Older</a>
-                        </li>
-                        <li class="next"><a href="#">Newer &rarr;</a>
-                        </li>
-                    </ul>
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
                 </div>
             </div>
         </div>

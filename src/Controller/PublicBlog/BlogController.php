@@ -5,6 +5,7 @@ namespace App\Controller\PublicBlog;
 use App\Entity\Article;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Controller\CoreBlog\BaseController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BlogController extends BaseController
@@ -14,16 +15,22 @@ class BlogController extends BaseController
     /**
      * @Route("/blog", name="blog")
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = $this
-            ->getDoctrine()
-            ->getRepository(Article::class)
-            ->findAll();
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT a FROM App\Entity\Article a";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1) /*page number*/,
+            3/*limit per page*/
+        );
 
         return $this->render('blog/index.html.twig', [
             'articleImgPath' => '\upload_files\articles\\',
-            'articles' => $articles,
+            'pagination' => $pagination,
 //            'title' => $articles[0]->getTitle(),
 //            'shortContent' => $shortContent,
 
